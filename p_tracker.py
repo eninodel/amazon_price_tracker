@@ -8,15 +8,16 @@ from statistics import mean
 import requests
 import sys
 import json
+from config import Amazon_urls
 
 discounts = []
 
-def Price_Tracker(*args):
-    for arg in args:
+def Price_Tracker(urls):
+    for url in urls:
         option = webdriver.ChromeOptions()
         option.add_argument("--incognito") # creates new instance of chrome in incognito mode
         browser = webdriver.Chrome(executable_path=r'C:\Users\bluep\chromedriver.exe', chrome_options=option) # PATH to chrome driver, r allows pc to read unicode
-        browser.get(arg)# url
+        browser.get(url)# url
         time.sleep(3.83698792)
         name = browser.find_elements_by_id('productTitle')#gets name of product
         name = name[0].text
@@ -72,7 +73,7 @@ def pushbullet_message(title, body):
         print ('Message sent') 
 
 #Amazon urls are placed in here
-Price_Tracker('https://www.amazon.com/ELEGOO-Project-Tutorial-Controller-Projects/dp/B01D8KOZF4/ref=sr_1_3?dchild=1&keywords=arduino+kit&qid=1587334169&sr=8-3','https://www.amazon.com/Dell-XPS-9380-13-3-Notebook/dp/B07R73H8PC/ref=sxin_3_osp44-013b3ba6_cov?ascsubtag=amzn1.osa.013b3ba6-0b2c-4572-817a-d5becaee9c2e.ATVPDKIKX0DER.en_US&creativeASIN=B07R73H8PC&cv_ct_cx=laptop&cv_ct_id=amzn1.osa.013b3ba6-0b2c-4572-817a-d5becaee9c2e.ATVPDKIKX0DER.en_US&cv_ct_pg=search&cv_ct_wn=osp-search&dchild=1&keywords=laptop&linkCode=oas&pd_rd_i=B07R73H8PC&pd_rd_r=699a9623-97b2-4444-a85b-455582f9eb19&pd_rd_w=fWDrj&pd_rd_wg=FwsxN&pf_rd_p=b6bd5224-05d9-4fef-a730-ce19a634e012&pf_rd_r=5RRV4R10XTB0QBGDXBWN&qid=1587697806&sr=1-1-32a32192-7547-4d9b-b4f8-fe31bfe05040&tag=reviewscom07-20','https://www.amazon.com/M-Audio-AIR-192-Studio-Grade-Instruments/dp/B07YYX7K6R/ref=sr_1_35?dchild=1&keywords=audio+interface&qid=1587954760&sr=8-35')
+Price_Tracker(Amazon_urls)
 
 messages = ''
 
